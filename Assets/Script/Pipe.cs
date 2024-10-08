@@ -9,7 +9,7 @@ public class Pipe : MonoBehaviour
     private void Start()
     {
         var pos = transform.position;
-        pos.y += Random.Range(-3, 3f);
+        pos.y += Random.Range(-1.5f, 1.5f);
         transform.position = pos;
     }
     void Update()
