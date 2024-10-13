@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public ScoreManager scoreManager;
     public TextMeshProUGUI scoreText;
     private Rigidbody2D rb;
     public float jumpForce = 100;
     public int score = 0;
+    public AudioClip successSound;
+    public AudioClip flap;
+    public AudioClip hit;
+    private AudioSource audioSource;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,6 +30,7 @@ public class Player : MonoBehaviour
             if (rb.velocity.y <0)
             {
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                audioSource.PlayOneShot(flap);
             }
             
         }
@@ -34,6 +42,7 @@ public class Player : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.Euler(0, 0, -30);
+            
         }
 
         
@@ -42,5 +51,17 @@ public class Player : MonoBehaviour
         {
             score++;
             scoreText.text = score.ToString("D4");
+            audioSource.PlayOneShot(successSound);
         }
+
+     void OnCollisionEnter2D(Collision2D col) 
+     {
+        scoreManager.ShowScoreBoard(score);
+        gameObject.SetActive(false);
+        audioSource.PlayOneShot(hit);
+    }
+
+    public void RestartGame(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
