@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public int score = 0;
     public AudioClip successSound;
     public AudioClip flap;
-    public AudioClip hit;
+    public AudioClip hitSound;
     private AudioSource audioSource;
     
     void Start()
@@ -56,9 +56,16 @@ public class Player : MonoBehaviour
 
      void OnCollisionEnter2D(Collision2D col) 
      {
+        audioSource.PlayOneShot(hitSound);
         scoreManager.ShowScoreBoard(score);
-        gameObject.SetActive(false);
-        audioSource.PlayOneShot(hit);
+        
+        Invoke("Die", 0.5f);
+    }
+
+    void Die()
+    {
+        gameObject.SetActive(false);//deactivates the player
+        //enabled = false;//deactivates the script
     }
 
     public void RestartGame(){

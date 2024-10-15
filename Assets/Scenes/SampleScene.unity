@@ -2098,7 +2098,7 @@ MonoBehaviour:
   score: 0
   successSound: {fileID: 8300000, guid: fdd4fb38b50958a4c92c7cb2b4218e13, type: 3}
   flap: {fileID: 8300000, guid: c04357ed459855e41839bb912e110e36, type: 3}
-  hit: {fileID: 8300000, guid: 0546f0bf4a21a4f41a383281c95b0fed, type: 3}
+  hitSound: {fileID: 8300000, guid: 0546f0bf4a21a4f41a383281c95b0fed, type: 3}
 --- !u!95 &1014209570
 Animator:
   serializedVersion: 5
